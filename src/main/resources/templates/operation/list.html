@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>展示查询信息的列表页面</title>
+    <style th:replace="success::operationStyle"></style>
+</head>
+<body>
+    <h1 align="center">欢迎来到信息展示列表页面</h1>
+    <!-- 引入公共片段 -->
+    <!-- 模板名：会使用Thymeleaf的前后缀配置规则进行解析 -->
+    <div th:replace="~{success :: admin}"></div>
+    <!-- 采用选择器的方式引入公共片段 -->
+    <!--<div th:replace="success :: #admin-operation"></div>-->
+    <div style="background: honeydew">
+        <button th:onclick="window.location='/add'" style="background: green; margin: 20px;">信息添加</button>
+        <table th:align="center">
+            <tr style="background: aqua">
+                <td style="width: 50px; text-align: center;">id</td>
+                <td style="width: 100px; text-align: center;">name</td>
+                <td style="width: 50px; text-align: center;">age</td>
+                <td style="width: 50px; text-align: center;">gender</td>
+                <td style="width: 100px; text-align: center;">department</td>
+                <td style="width: 130px; text-align: center;">birthday</td>
+                <td style="width: 150px; text-align: center;">operation</td>
+            </tr>
+            <tr th:each="person:${list}">
+                <td th:text="${person.id}" th:align="center"></td>
+                <td th:text="${person.name}" th:align="center"></td>
+                <td th:text="${person.age}" th:align="center"></td>
+                <td th:text="${person.gender}=='1'?'男':'女'" th:align="center"></td>
+                <td th:text="${person.department.department}" th:align="center"></td>
+                <td th:text="${#dates.format(person.birthday,'yyyy-MM-dd')}" th:align="center"></td>
+                <td th:align="center">
+                    <button th:onclick="window.location='/update/[(${person.id})]'" style="background: cornflowerblue; margin: 3px; width: 60px">update</button>
+                    <!--<form id="delete-form" th:action="@{/delete/}+${person.id}" method="post">-->
+                        <!--<input type="hidden" name="_method" value="delete">-->
+                        <button type="submit" style="background: red; margin: 3px; width: 60px">delete</button>
+                    <!--</form>-->
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index页面</title>
+    <style type="text/css">
+        #outer{
+            width:750px;
+        }
+        span{
+            color:#ff0000;
+        }
+        div{
+            height:20px;
+            margin-bottom:10px;
+        }
+        .main{
+            margin:20px;
+        }
+        .ch{
+            width:80px;
+            float:left;
+            text-align:right;
+        }
+        .ip{
+            width:500px;
+            float:left;
+        }
+        .ip>input{
+            margin-right:20px;
+        }
+        #bt{
+            margin-left:50px;
+        }
+        #bt>input{
+            margin-right:30px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h3 th:text="#{login.title}"></h3>
+    <form th:action="@{/user/login}" th:method="post">
+        <p style="color: red" th:text="${error}" th:if="${not #strings.isEmpty(error)}"></p>
+        <table>
+            <tr class="main">
+                <td class="ch" th:text="#{login.username}"></td>
+                <td><input type="text" name="username" th:placeholder="#{login.username.tip}" /></td>
+            </tr>
+            <tr class="main">
+                <td class="ch" th:text="#{login.password}"></td>
+                <td><input type="password" name="password" th:placeholder="#{login.password.tip}" /></td>
+            </tr>
+            <tr class="main" style="margin:20px">
+                <td id="anniu1" align="center"><input type="reset" th:value="#{login.reset}"/></td>
+                <td id="anniu2" th:align="center"><input type="submit" th:value="#{login.submit}" /></td>
+            </tr>
+            <tr class="main" style="margin:20px">
+                <!-- 设置请求连接并携带语言地区信息参数 -->
+                <td id="anniu3" align="center"><a th:href="@{/index.html(language='zh_CN')}">中文</a></td>
+                <td id="anniu4" th:align="center"><a th:href="@{/index.html(language='en_US')}">English</a></td>
+            </tr>
+        </table>
+    </form>
+</center>
+</body>
+</html>

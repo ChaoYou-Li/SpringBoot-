@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员添加信息操作页面</title>
+    <style th:replace="success::operationStyle"></style>
+    <!--<style th:replace="register::registerStyle"></style>-->
+</head>
+<body>
+    <h1 align="center">欢迎来到信息添加操作页面</h1>
+    <!-- 引入公共片段 -->
+    <!-- 模板名：会使用Thymeleaf的前后缀配置规则进行解析 -->
+    <div th:replace="~{success :: admin}"></div>
+    <!-- 采用选择器的方式引入公共片段 -->
+    <!--<div th:replace="success :: #admin-operation"></div>-->
+    <div th:replace="operation/update::backBtn"></div>
+    <center>
+        <form th:action="@{/info/add}" method="post" style="background: aliceblue">
+            <table>
+                <tr class="main">
+                    <td class="ch">名字：</td>
+                    <td><input type="text" name="name" value="" /></td>
+                </tr>
+                <tr class="main">
+                    <td class="ch">年龄：</td>
+                    <td><input type="text" name="age" /></td>
+                </tr>
+                <tr class="main">
+                    <td class="ch">性别：</td>
+                    <td>
+                        <input type="radio" name="gender" value="1" />男
+                        <input type="radio" name="gender" value="0" />女
+                    </td>
+                </tr>
+                <tr class="main">
+                    <td class="ch">职位：</td>
+                    <td>
+                        <select  name="department">
+                            <option>请选择</option>
+                            <option th:each="depart:${department}" th:value="${depart.id}" th:text="${depart.department}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="main">
+                    <td class="ch">生日：</td>
+                    <td>
+                        <input type="date" name="birthday" />
+                    </td>
+                </tr>
+                <tr class="main" style="margin:20px">
+                    <td id="anniu1"><input type="reset" value="重置" /></td>
+                    <td id="anniu2"><input type="submit" value="提交" /></td>
+                </tr>
+            </table>
+        </form>
+    </center>
+
+</body>
+</html>

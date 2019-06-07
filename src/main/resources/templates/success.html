@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{login.success}"></title>
+    <style type="text/css" th:fragment="operationStyle">
+        .operation{
+            width: 150px;
+            line-height: 40px;
+            text-align: center;
+            float: left;
+        }
+        #admin-operation{
+            width: 600px;
+            margin: auto;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1 th:align="center" th:text="#{login.success}"></h1>
+    <!-- 抽取公共片段 -->
+    <div th:fragment="admin">
+        <b th:align="center" th:text="#{login.account}"></b>
+        <table th:align="center">
+            <tr>
+                <td th:text="#{login.username}"></td>
+                <!-- 获取session域中用户信息 -->
+                <td th:text="${session.loginUser}"></td>
+            </tr>
+            <tr>
+                <td th:text="#{login.password}"></td>
+                <td th:text="${session.password}"></td>
+            </tr>
+        </table>
+    </div>
+    <!-- (~{templatename::selector}：模板名 :: 选择器)的方式引入公共片段 -->
+    <!--<div id="admin-operation">-->
+        <!--<div class="operation" th:style="${active=='find'?'background:red;':'background:none;'}">-->
+            <!--<a th:href="@{/info/list}">信息查询</a>-->
+        <!--</div>-->
+        <!--<div class="operation" th:style="${active=='add'?'background:red;':'background:none;'}">-->
+            <!--<a th:href="@{/add}">信息添加</a>-->
+        <!--</div>-->
+        <!--<div class="operation" th:style="${active=='update'?'background:red;':'background:none;'}">-->
+            <!--<a th:href="@{/update}">信息修改</a>-->
+        <!--</div>-->
+        <!--<div class="operation" th:style="${active=='delete'?'background:red;':'background:none;'}">-->
+            <!--<a th:href="@{/delete}">信息删除</a>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<a th:href="@{}"></a>&ndash;&gt;-->
+    <!--</div>-->
+
+
+</body>
+</html>

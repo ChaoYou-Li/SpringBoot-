@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员删除信息操作页面</title>
+    <style th:replace="success::operationStyle"></style>
+</head>
+<body>
+    <h1 align="center">欢迎来到信息删除操作页面</h1>
+    <!-- 引入公共片段 -->
+    <!-- 模板名：会使用Thymeleaf的前后缀配置规则进行解析 -->
+    <div th:replace="~{success :: admin}"></div>
+    <!-- 采用选择器的方式引入公共片段 -->
+    <div th:replace="success :: #admin-operation"></div>
+    <div th:replace="operation/update::backBtn"></div>
+</body>
+</html>

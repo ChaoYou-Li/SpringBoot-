@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员更新信息操作页面</title>
+    <style th:replace="success::operationStyle"></style>
+</head>
+<body>
+<h1 align="center">欢迎来到信息更新操作页面</h1>
+<!-- 引入公共片段 -->
+<!-- 模板名：会使用Thymeleaf的前后缀配置规则进行解析 -->
+<div th:replace="~{success :: admin}"></div>
+<!-- 采用选择器的方式引入公共片段 -->
+<button th:fragment="backBtn" onclick="window.location='/info/list'">上一步</button>
+<center th:fragment="form">
+    <form id="update-form" th:action="@{/info/update/}+${person.id}" method="post" style="background: aliceblue">
+        <!-- 发送put请求修改员工数据
+             1、SpringMVC中配置HiddenHttpMethodFilter;(SpringBoot自动配置好）
+             2、页面创建一个post表单
+             3、创建一个input项，name="_mothod";值就是我们制定的请求方式
+         -->
+        <input type="hidden" name="_method" value="put">
+        <table>
+            <tr class="main">
+                <td class="ch">名字：</td>
+                <td><input type="text" name="name" th:value="${person.name}" /></td>
+            </tr>
+            <tr class="main">
+                <td class="ch">年龄：</td>
+                <td><input type="text" name="age" th:value="${person.age}" /></td>
+            </tr>
+            <tr class="main">
+                <td class="ch">性别：</td>
+                <td>
+                    <input type="radio" name="gender" value="1" th:checked="${person.gender==1}" />男
+                    <input type="radio" name="gender" value="0" th:checked="${person.gender==0}" />女
+                </td>
+            </tr>
+            <tr class="main">
+                <td class="ch">职位：</td>
+                <td>
+                    <select  name="department">
+                        <option>请选择</option>
+                        <option th:each="depart:${department}" th:value="${depart.id}" th:text="${depart.department}" th:selected="${person.department.id==depart.id}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="main">
+                <td class="ch">生日：</td>
+                <td>
+                    <input type="date" name="birthday" th:value="${person.birthday}" />
+                </td>
+            </tr>
+            <tr class="main" style="margin:20px">
+                <td id="anniu1"><input type="reset" value="重置" /></td>
+                <td id="anniu2"><input type="submit" value="提交"></td>
+            </tr>
+        </table>
+    </form>
+</center>
+
+</body>
+    <script type="text/javascript" th:src="@{webjars/jquery/3.4.1/jquery.js}"></script>
+    <!--<script>-->
+        <!--$(".updateBtn").click(function () {-->
+            <!--console.log($(this).attr("update"))-->
+            <!--$("#update-form").attr('action',$(this).attr("update")).submit();-->
+            <!--return false;-->
+        <!--})-->
+    <!--</script>-->
+</html>
